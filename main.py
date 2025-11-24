@@ -19,7 +19,7 @@ import aiohttp
 
 from fastapi import Request, FastAPI, HTTPException
 
-from langchain.chat_models import ChatOpenAI
+# from langchain.chat_models import ChatOpenAI
 from langchain.agents import AgentType
 from langchain.agents import initialize_agent
 
