@@ -21,8 +21,8 @@ from fastapi import Request, FastAPI, HTTPException
 
 # from langchain.chat_models import ChatOpenAI
 from langchain_openai import ChatOpenAI
-from langchain.agents import AgentType
-from langchain.agents import initialize_agent
+# from langchain.agents import AgentType
+# from langchain.agents import initialize_agent
 
 from stock_price import StockPriceTool
 from stock_peformace import StockPercentageChangeTool
@@ -63,8 +63,8 @@ model = ChatOpenAI(model="google/gemma-3-27b-it:free",
     openai_api_key=os.environ["OPENAI_API_KEY"],
     openai_api_base=os.environ.get("OPENAI_API_BASE", "https://openrouter.ai/api/v1"),
     temperature=0)
-tools = [StockPriceTool(), StockPercentageChangeTool(),
-         StockGetBestPerformingTool()]
+# tools = [StockPriceTool(), StockPercentageChangeTool(),
+         # StockGetBestPerformingTool()]
 # open_ai_agent = initialize_agent(tools,
 #                                 model,
 #                                 agent=AgentType.OPENAI_FUNCTIONS,
