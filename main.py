@@ -65,10 +65,10 @@ model = ChatOpenAI(model="google/gemma-3-27b-it:free",
     temperature=0)
 tools = [StockPriceTool(), StockPercentageChangeTool(),
          StockGetBestPerformingTool()]
-open_ai_agent = initialize_agent(tools,
-                                 model,
-                                 agent=AgentType.OPENAI_FUNCTIONS,
-                                 verbose=False)
+# open_ai_agent = initialize_agent(tools,
+#                                 model,
+#                                 agent=AgentType.OPENAI_FUNCTIONS,
+#                                 verbose=False)
 
 
 @app.post("/callback")
