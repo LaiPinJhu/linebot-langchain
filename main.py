@@ -58,7 +58,10 @@ line_bot_api = AsyncLineBotApi(channel_access_token, async_http_client)
 parser = WebhookParser(channel_secret)
 
 # Langchain (you must use 0613 model to use OpenAI functions.)
-model = ChatOpenAI(model="google/gemma-3-27b-it:free", temperature=0,openai_api_base="https://openrouter.ai/api/v1",openai_api_key=os.environ["OPENROUTER_API_KEY"])
+model = ChatOpenAI(model="google/gemma-3-27b-it:free",
+    openai_api_key=os.environ["OPENAI_API_KEY"],
+    openai_api_base=os.environ.get("OPENAI_API_BASE", "https://openrouter.ai/api/v1"),
+    temperature=0)
 tools = [StockPriceTool(), StockPercentageChangeTool(),
          StockGetBestPerformingTool()]
 open_ai_agent = initialize_agent(tools,
