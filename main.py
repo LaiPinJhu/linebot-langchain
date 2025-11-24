@@ -94,7 +94,33 @@ async def handle_callback(request: Request):
             continue
 
         # tool_result = open_ai_agent.run(event.message.text)
-        response = model.invoke(event.message.text)
+        prompt = f"""
+        你是一個金融助理。回答要非常簡短、直覺。
+        
+        功能：
+        1. 若用戶詢問股票資訊（例如：microsoft、meta、0050），你要自動提供：
+           - 當前股價
+           - 與前一天相比的漲跌百分比
+           - 回答越短越好，不要廢話，不要寫段落。
+        
+        2. 若用戶說：當「某股票 > 某價格」或「跌到某價格」時，提醒我。
+           你要用自然語言確認：
+           - 股票名稱
+           - 目標價格
+           - 方向（高於 / 低於）
+           - 並回答：「已幫你設定提醒」。
+        
+        注意：
+        - 0050、0056 屬於台灣股票，用 yfinance 的格式為 '0050.TW'
+        - 不要寫任何技術解釋，只用對話格式回答。
+        
+        使用者輸入：{event.message.text}
+        """
+        
+        response = model.invoke(prompt)
+
+
+        # response = model.invoke(event.message.text)
         tool_result = response.content
 
         await line_bot_api.reply_message(
