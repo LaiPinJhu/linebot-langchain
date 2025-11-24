@@ -90,7 +90,9 @@ async def handle_callback(request: Request):
         if not isinstance(event.message, TextMessage):
             continue
 
-        tool_result = open_ai_agent.run(event.message.text)
+        # tool_result = open_ai_agent.run(event.message.text)
+        response = model.invoke(event.message.text)
+        tool_result = response.content
 
         await line_bot_api.reply_message(
             event.reply_token,
